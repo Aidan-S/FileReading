@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -27,35 +28,95 @@ public class FileReader {
 		}
 		
 
-		return input;
-		
+		return input;	
+	}
+	
+	public static PrintWriter outputFile(String fName) {
+			File fileName = new File(fName);
+
+			PrintWriter output = null;
+
+			try {
+				output = new PrintWriter(fileName);
+			} catch (FileNotFoundException ex) {
+				System.out.print("Cannot open " + fName);
+				return null;
+
+			}
+
+			return output;
 	}
 	
 	public static boolean braces(Scanner in) {
 		int numB = 0;
-		while(in.hasNextLine()) {
-			
+		while(numB >= 0 && in.hasNextLine()) {
+			if(in.next() = "") {
 		}
 		
 	
 	}
+		
+	public static boolean compare(Scanner first, Scanner second) {
+		int fLines = 0;
+		while(first.hasNextLine()) {
+			fLines++;
+		}
+		int sLines = 0;
+		while(second.hasNextLine()) {
+			sLines++;
+		}
+		if(fLines != sLines){return false;}
+		
+		sLines = 0;
+		
+		while (first.hasNextLine() && second.hasNextLine()) {
+			String line1 = first.nextLine();
+			String line2 = second.nextLine();
+			
+			
+			}
+		
+		
+		return true;
+	}
 	
+	public static boolean storyTime(Scanner in) {
+		
+		
 	
+	}
 	
 	public static void main(String[] args) {
-		
-		
 		Scanner file1 = openWords(args[0]);
 		Scanner file2 = openWords(args[1]);
 		Scanner file3 = openWords(args[2]);
+		PrintWriter out = outputFile("output.txt");
 		
+		if (braces(file1))
+			out.println("Braces Balanced");
+		else
+			out.println("Braces Not Balanced");
 		
+		out.println();
 		
+		if (compare(file1, file2))
+			out.println("Files Identical");
+		else
+			out.println("Files Not Identical");
+		
+		out.println();
+		
+		storyTime(file3);
 		
 		file1.close();
 		file2.close();
 		file3.close();
+		
+		out.close();
 			
 	}
+
+
+	
 
 }

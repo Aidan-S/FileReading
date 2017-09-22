@@ -47,11 +47,10 @@ public class FileReader {
 			return output;
 	}
 	
-	public static boolean braces(Scanner in) {
+	public static boolean braces(Scanner fname) {
 		int numB = 0;
-		while(numB >= 0 && in.hasNextLine()) {
-			if(in.next() = "") {
-		}
+		
+		
 		
 	
 	}
@@ -67,14 +66,11 @@ public class FileReader {
 		}
 		if(fLines != sLines){return false;}
 		
-		sLines = 0;
-		
 		while (first.hasNextLine() && second.hasNextLine()) {
 			String line1 = first.nextLine();
 			String line2 = second.nextLine();
-			
-			
-			}
+			if(!(line1.equals(line2))) {return false;}
+		}
 		
 		
 		return true;
@@ -83,7 +79,7 @@ public class FileReader {
 	public static boolean storyTime(Scanner in) {
 		
 		
-	
+	return false;
 	}
 	
 	public static void main(String[] args) {

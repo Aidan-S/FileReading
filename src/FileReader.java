@@ -31,6 +31,7 @@ public class FileReader {
 		return input;	
 	}
 	
+	
 	public static PrintWriter outputFile(String fName) {
 			File fileName = new File(fName);
 
@@ -47,68 +48,76 @@ public class FileReader {
 			return output;
 	}
 	
-	public static boolean braces(Scanner fname) {
-		int numB = 0;
-		
-		
-		
 	
-	}
+	public static boolean braces(Scanner fname) {
 		
-	public static boolean compare(Scanner first, Scanner second) {
-		int fLines = 0;
-		while(first.hasNextLine()) {
-			fLines++;
-		}
-		int sLines = 0;
-		while(second.hasNextLine()) {
-			sLines++;
-		}
-		if(fLines != sLines){return false;}
-		
-		while (first.hasNextLine() && second.hasNextLine()) {
-			String line1 = first.nextLine();
-			String line2 = second.nextLine();
-			if(!(line1.equals(line2))) {return false;}
-		}
 		
 		
 		return true;
+	
+	}
+		
+	
+	public static boolean compare(Scanner first, Scanner second) {
+		while (first.hasNextLine() && second.hasNextLine()) {
+			String line1 = first.nextLine();
+			String line2 = second.nextLine();
+			System.out.println("loop");
+
+			if(!(line1.equals(line2))) {return false;}
+			if((first.hasNextLine() && !second.hasNextLine()) || (!first.hasNextLine() && second.hasNextLine())) {return false;}	
+		}
+		return true;
 	}
 	
+	
 	public static boolean storyTime(Scanner in) {
+	
 		
 		
-	return false;
+		
+		
+		return false;
 	}
+	
 	
 	public static void main(String[] args) {
 		Scanner file1 = openWords(args[0]);
 		Scanner file2 = openWords(args[1]);
 		Scanner file3 = openWords(args[2]);
-		PrintWriter out = outputFile("output.txt");
+		//PrintWriter out = outputFile("output.txt");
 		
-		if (braces(file1))
-			out.println("Braces Balanced");
-		else
-			out.println("Braces Not Balanced");
+		if (braces(file1)) {
+			//out.println("Braces Balanced");
+			System.out.println("Braces Balanced");
+		}else{
+			//out.println("Braces Not Balanced");
+			System.out.println("Braces Not Balanced");
+		}
 		
-		out.println();
+		//out.println();
+		System.out.println();
 		
-		if (compare(file1, file2))
-			out.println("Files Identical");
-		else
-			out.println("Files Not Identical");
+		if (compare(file1, file2)) {
+			//out.println("Files Identical");
+			System.out.println("Files Identical");
+		}else{
+			//out.println("Files Not Identical");
+			System.out.println("Files Not Identical");
+		}
 		
-		out.println();
+		//out.println();
+		System.out.println();
 		
-		storyTime(file3);
+		//storyTime(file3);
 		
 		file1.close();
 		file2.close();
 		file3.close();
 		
-		out.close();
+		
+		//out.close();
+		System.out.println("Done");
 			
 	}
 

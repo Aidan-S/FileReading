@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,14 +17,14 @@ public class FileReader {
 	/**
 	 * @param args
 	 */
-	public static Scanner openWords(String fname) {
+	public static Scanner openWords(String fname, int fnum) {
 		
 		File file = new File(fname);
 		Scanner input = null;
 		try {
 			input = new Scanner(file);
 		} catch (FileNotFoundException ex) {
-			System.out.println("Part 1: Unable to Open File");
+			System.out.print("Part " + fnum + ": Unable to Open File");
 			return null;
 		}
 		
@@ -71,20 +72,56 @@ public class FileReader {
 	}
 	
 	
-	public static boolean storyTime(Scanner in) {
+	public static void storyTime(Scanner story, ArrayList<String> words) {
+		int i = 0;
+		while (story.hasNextLine()&&i < words.size()) {
+			String line = story.nextLine();
+
+			while (line.indexOf('<') > -1 && line.indexOf('>') > -1) {
+				line = line.substring(0, line.indexOf('<')) + words.get(i) + line.substring(line.indexOf('>') + 1);
+				i++;
+			}
+			System.out.println(line);
+		}
+
+	}
 	
+	
+	public static ArrayList<String> storyWordsSupp(Scanner in) {
+		ArrayList<String> words = new ArrayList<String>();
+		while (in.hasNextLine()) {
+			words.add(in.nextLine());
+		}
+		return words;
+	}
+	
+	
+	public static ArrayList<String> userInput(Scanner file) {
+		ArrayList<String> words = new ArrayList<String>();
+		Scanner keyboard = new Scanner(System.in);
 		
-		
-		
-		
-		return false;
+		while (file.hasNextLine()) {
+			String nextline = file.nextLine();
+
+			while (nextline.indexOf('<') > -1 && nextline.indexOf('>') > -1) {
+
+				String word = nextline.substring(nextline.indexOf('<') + 1, nextline.indexOf('>'));
+				System.out.println("Insert a " + word);
+				String input = keyboard.nextLine();
+				words.add(input);
+				nextline = nextline.substring(nextline.indexOf('>') + 1);
+			}
+		}
+		file.close();
+		keyboard.close();
+		return words;
 	}
 	
 	
 	public static void main(String[] args) {
-		Scanner file1 = openWords(args[0]);
-		Scanner file2 = openWords(args[1]);
-		Scanner file3 = openWords(args[2]);
+		Scanner file1 = openWords(args[0], 1);
+		Scanner file2 = openWords(args[1], 2);
+		Scanner file3 = openWords(args[2], 3);
 		//PrintWriter out = outputFile("output.txt");
 		
 		if (braces(file1)) {
@@ -109,7 +146,16 @@ public class FileReader {
 		//out.println();
 		System.out.println();
 		
-		//storyTime(file3);
+		if (args.length < 4) {
+			ArrayList<String> words = userInput(file3);
+			file3 = openWords(args[2], 3);
+			storyTime(file3, words);
+		}else{
+			Scanner file4 = openWords(args[3], 4);
+			ArrayList<String> words = storyWordsSupp(file4);
+			storyTime(file3, words);
+		}
+		
 		
 		file1.close();
 		file2.close();

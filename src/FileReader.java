@@ -51,10 +51,27 @@ public class FileReader {
 	
 	
 	public static boolean braces(Scanner fname) {
+		int braces = 0;
+		while(fname.hasNextLine()){
+			String line = fname.nextLine();
+			for(int i = 0; i < line.length(); i++) {
+				char c = line.charAt(i);
+				if(c == '{') {
+					braces++;
+				}
+				if(c == '}') {
+					braces--;
+				}	
+					
+			}
+			
+		}
 		
-		
-		
-		return true;
+		if(braces == 0) {
+			return true;
+		}else {
+			return false;
+		}
 	
 	}
 		
@@ -122,29 +139,24 @@ public class FileReader {
 		Scanner file1 = openWords(args[0], 1);
 		Scanner file2 = openWords(args[1], 2);
 		Scanner file3 = openWords(args[2], 3);
-		//PrintWriter out = outputFile("output.txt");
+		PrintWriter out = outputFile("output.txt");
 		
 		if (braces(file1)) {
-			//out.println("Braces Balanced");
-			System.out.println("Braces Balanced");
+			out.println("Braces Balanced");
 		}else{
-			//out.println("Braces Not Balanced");
-			System.out.println("Braces Not Balanced");
+			out.println("Braces Not Balanced");
 		}
 		
-		//out.println();
-		System.out.println();
+		out.println();
 		
 		if (compare(file1, file2)) {
-			//out.println("Files Identical");
-			System.out.println("Files Identical");
+			out.println("Files Identical");
 		}else{
-			//out.println("Files Not Identical");
-			System.out.println("Files Not Identical");
+			out.println("Files Not Identical");
 		}
 		
-		//out.println();
-		System.out.println();
+		out.println();
+		
 		
 		if (args.length < 4) {
 			ArrayList<String> words = userInput(file3);
@@ -162,7 +174,7 @@ public class FileReader {
 		file3.close();
 		
 		
-		//out.close();
+		out.close();
 		System.out.println("Done");
 			
 	}
